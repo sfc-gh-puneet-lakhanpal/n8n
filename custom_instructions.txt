@@ -1,0 +1,35 @@
+Testing instructions:
+
+brew install node@22
+echo 'export PATH="/opt/homebrew/opt/node@22/bin:$PATH"' >> /Users/plakhanpal/.zshrc
+brew install corepack 
+corepack enable
+corepack prepare pnpm --activate
+conda create -n n8n python=3.10
+conda activate n8n
+pip install setuptools
+pip install distutils
+echo "python=/opt/anaconda3/envs/n8n/bin/python" >> .npmrc
+pnpm install
+pnpm build
+
+export GENERIC_TIMEZONE="America/Los_Angeles"                          
+export N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS="true"
+export N8N_RUNNERS_ENABLED="true"
+export N8N_DIAGNOSTICS_ENABLED="false"
+export N8N_VERSION_NOTIFICATIONS_ENABLED="false"
+export N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE="true"
+export N8N_EDITOR_BASE_URL="https://whatsnewinspcstest.ngrok.app"
+export WEBHOOK_URL="https://whatsnewinspcstest.ngrok.app"
+export WEBHOOK_TUNNEL_URL="https://whatsnewinspcstest.ngrok.app"
+export N8N_DEFAULT_BINARY_DATA_MODE="filesystem"
+export NGROK_AUTH_TOKEN="2wSUJRo1X9ZMWPZMlA4JZM27hHF_6JFWGyHLZXzZpSqThTmGP"
+export NGROK_DOMAIN="whatsnewinspcstest.ngrok.app"
+export N8N_TRUST_PROXY="true"
+
+pnpm start 
+
+
+
+docker build --no-cache --platform linux/amd64 -t n8ncustom -f docker/images/n8n/Dockerfile .
+docker build --platform linux/amd64 -t n8ncustom -f docker/images/n8n/Dockerfile .
